@@ -208,52 +208,85 @@ class Forgot extends StatefulWidget {
 }
 
 class _ForgotState extends State<Forgot> {
+  bool switchValue = false;
+  double calculateContainerHeight() {
+    if (switchValue) {
+      return 600.0;
+    } else {
+      return 500.0;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: <Widget>[
+          Align(
+              // alignment: Alignment.center,
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image(
+                  height: 80,
+                  // opacity: AlwaysStoppedAnimation(0.6),
+                  width: 80,
+                  image: AssetImage("assets/images/logo.png")),
+            ],
+          )),
           Container(
               decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage("assets/images/buildings.jpg"),
                       fit: BoxFit.cover)),
               child: null),
-          Positioned(
-            left: 100,
-            top: 100,
-            child: Column(
-              children: [
-                Container(
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Align(
+                  // alignment: Alignment.center,
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(
+                      height: 80,
+                      // opacity: AlwaysStoppedAnimation(0.6),
+                      width: 80,
+                      image: AssetImage("assets/images/logo.png")),
+                ],
+              )),
+              Container(
+                decoration: BoxDecoration(
                   color: Colors.white,
-                  height: 390,
-                  width: 400,
-                  alignment: Alignment.centerLeft,
-                  margin: const EdgeInsets.all(30),
-                  padding: const EdgeInsets.all(30),
-                  child: DefaultTabController(
-                    length: 2,
-                    child: Column(
-                      children: [
-                        Container(
-                          color: Colors.white,
-                          child: const TabBar(
-                            tabs: [
-                              Tab(text: 'ALREADY REGISTERED'),
-                              Tab(text: 'I AM NEW HERE')
-                            ],
-                            labelColor: Colors.orange,
-                            unselectedLabelColor: Colors.grey,
-                            indicatorColor: Colors.orange,
-                            indicatorWeight: 4.0,
-                            labelStyle: TextStyle(
-                                fontSize: 12.0, fontWeight: FontWeight.w400),
-                            unselectedLabelStyle: TextStyle(fontSize: 14.0),
-                          ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                height: calculateContainerHeight(), // Pass the screen width
+                margin: EdgeInsets.all(10),
+                child: DefaultTabController(
+                  length: 2,
+                  child: Column(
+                    children: [
+                      Container(
+                        // color: Colors.white,
+                        child: const TabBar(
+                          tabs: [
+                            Tab(text: 'ALREADY REGISTERED'),
+                            Tab(text: 'I AM NEW HERE')
+                          ],
+                          labelColor: Colors.orange,
+                          unselectedLabelColor: Colors.grey,
+                          indicatorColor: Colors.orange,
+                          indicatorWeight: 4.0,
+                          labelStyle: TextStyle(
+                              fontSize: 12.0, fontWeight: FontWeight.w400),
+                          unselectedLabelStyle: TextStyle(fontSize: 14.0),
                         ),
-                        Expanded(
-                          child: TabBarView(children: [
-                            Form(
+                      ),
+                      Expanded(
+                        child: TabBarView(children: [
+                          Container(
+                            margin: EdgeInsets.all(10),
+                            child: Form(
                                 child: Column(
                               children: [
                                 const SizedBox(
@@ -279,10 +312,7 @@ class _ForgotState extends State<Forgot> {
                                   ),
                                 ),
                                 const SizedBox(
-                                  height: 30,
-                                ),
-                                const SizedBox(
-                                  height: 30,
+                                  height: 60,
                                 ),
                                 MaterialButton(
                                   onPressed: () {
@@ -295,39 +325,49 @@ class _ForgotState extends State<Forgot> {
                                   child: const Text('Continue'),
                                 ),
                                 const SizedBox(
-                                  height: 30,
+                                  height: 100,
                                 ),
+                                Image.network(
+                                    'https://th.bing.com/th/id/OIP.4PvuBIJEiXqYBCQqW4x4MgAAAA?rs=1&pid=ImgDetMain'),
                               ],
                             )),
-                            const Center(child: Text('Data'))
-                          ]),
-                        )
-                      ],
-                    ),
+                          ),
+                          //SignUp Tab
+                          SignupTab(
+                            switchValue: switchValue,
+                            onSwitchChanged: (value) {
+                              setState(() {
+                                switchValue = value;
+                              });
+                            },
+                          ),
+                        ]),
+                      )
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          const Positioned(
-              left: 200,
-              top: 80,
-              child: Row(
-                children: [
-                  Image(
-                      height: 80,
-                      opacity: AlwaysStoppedAnimation(0.6),
-                      width: 80,
-                      image: AssetImage("assets/images/leaf.jpg")),
-                  Text(
-                    'Hello\nCanada',
-                    style: TextStyle(
-                        color: Colors.indigo,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w900),
-                  )
-                ],
-              )),
+          // const Positioned(
+          //     left: 200,
+          //     top: 80,
+          //     child: Row(
+          //       children: [
+          //         Image(
+          //             height: 80,
+          //             opacity: AlwaysStoppedAnimation(0.6),
+          //             width: 80,
+          //             image: AssetImage("assets/images/leaf.jpg")),
+          //         Text(
+          //           'Hello\nCanada',
+          //           style: TextStyle(
+          //               color: Colors.indigo,
+          //               fontSize: 30,
+          //               fontWeight: FontWeight.w900),
+          //         )
+          //       ],
+          //     )),
         ],
       ),
     );

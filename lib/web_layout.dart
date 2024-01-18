@@ -200,6 +200,18 @@ class Forgot extends StatefulWidget {
 }
 
 class _ForgotState extends State<Forgot> {
+  bool switchValue = false;
+
+  double calculateContainerHeight(double screenWidth) {
+    if (screenWidth > 1200) {
+      return switchValue ? 600.0 : 500.0;
+    } else if (screenWidth > 600) {
+      return switchValue ? 600.0 : 500.0;
+    } else {
+      return switchValue ? 600.0 : 500.0;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -211,117 +223,117 @@ class _ForgotState extends State<Forgot> {
                       image: AssetImage("assets/images/buildings.jpg"),
                       fit: BoxFit.cover)),
               child: null),
-          Positioned(
-            left: 100,
-            top: 100,
-            child: Column(
-              children: [
-                Container(
-                  color: Colors.white,
-                  height: 390,
-                  width: 400,
-                  alignment: Alignment.centerLeft,
-                  margin: const EdgeInsets.all(30),
-                  padding: const EdgeInsets.all(30),
-                  child: DefaultTabController(
-                    length: 2,
-                    child: Column(
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              width: 400,
+              height:
+                  calculateContainerHeight(MediaQuery.of(context).size.width),
+              margin: EdgeInsets.only(left: 150, top: 30, bottom: 20),
+              child: DefaultTabController(
+                length: 2,
+                child: Column(
+                  children: [
+                    Align(
+                        // alignment: Alignment.center,
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          color: Colors.white,
-                          child: const TabBar(
-                            tabs: [
-                              Tab(text: 'ALREADY REGISTERED'),
-                              Tab(text: 'I AM NEW HERE')
-                            ],
-                            labelColor: Colors.orange,
-                            unselectedLabelColor: Colors.grey,
-                            indicatorColor: Colors.orange,
-                            indicatorWeight: 4.0,
-                            labelStyle: TextStyle(
-                                fontSize: 12.0, fontWeight: FontWeight.w400),
-                            unselectedLabelStyle: TextStyle(fontSize: 14.0),
-                          ),
-                        ),
-                        Expanded(
-                          child: TabBarView(children: [
-                            Form(
-                                child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                const Text(
-                                  'Forgot Password',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  height: 30,
-                                ),
-                                Container(
-                                  height: 45,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black),
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: TextFormField(
-                                    decoration: const InputDecoration(
-                                        icon: Icon(Icons.person_sharp),
-                                        border: InputBorder.none,
-                                        labelText: 'Email'),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 30,
-                                ),
-                                const SizedBox(
-                                  height: 30,
-                                ),
-                                MaterialButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  textColor: Colors.white,
-                                  minWidth: 350,
-                                  height: 45,
-                                  color: Colors.indigo[900],
-                                  child: const Text('Continue'),
-                                ),
-                                // const SizedBox(
-                                //   height: 30,
-                                // ),
-                                Image.network(
-                                    'https://th.bing.com/th/id/OIP.4PvuBIJEiXqYBCQqW4x4MgAAAA?rs=1&pid=ImgDetMain'),
-                              ],
-                            )),
-                            const Center(child: Text('Data'))
-                          ]),
-                        )
+                        Image(
+                            height: 80,
+                            // opacity: AlwaysStoppedAnimation(0.6),
+                            width: 80,
+                            image: AssetImage("assets/images/logo.png")),
                       ],
+                    )),
+                    Container(
+                      // color: Colors.white,
+                      child: const TabBar(
+                        tabs: [
+                          Tab(text: 'ALREADY REGISTERED'),
+                          Tab(text: 'I AM NEW HERE')
+                        ],
+                        labelColor: Colors.orange,
+                        unselectedLabelColor: Colors.grey,
+                        indicatorColor: Colors.orange,
+                        indicatorWeight: 4.0,
+                        labelStyle: TextStyle(
+                            fontSize: 12.0, fontWeight: FontWeight.w400),
+                        unselectedLabelStyle: TextStyle(fontSize: 14.0),
+                      ),
                     ),
-                  ),
+                    Expanded(
+                      child: TabBarView(children: [
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          child: Form(
+                              child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              const Text(
+                                'Forgot Password',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              Container(
+                                height: 45,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: TextFormField(
+                                  decoration: const InputDecoration(
+                                      icon: Icon(Icons.person_sharp),
+                                      border: InputBorder.none,
+                                      labelText: 'Email'),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              MaterialButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                textColor: Colors.white,
+                                minWidth: 350,
+                                height: 45,
+                                color: Colors.indigo[900],
+                                child: const Text('Continue'),
+                              ),
+                              const SizedBox(
+                                height: 60,
+                              ),
+                              Image.network(
+                                  'https://th.bing.com/th/id/OIP.4PvuBIJEiXqYBCQqW4x4MgAAAA?rs=1&pid=ImgDetMain'),
+                            ],
+                          )),
+                        ),
+                        SignupTab(
+                          switchValue: switchValue,
+                          onSwitchChanged: (value) {
+                            setState(() {
+                              switchValue = value;
+                            });
+                          },
+                        ),
+                      ]),
+                    )
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-          const Positioned(
-              left: 200,
-              top: 80,
-              child: Row(
-                children: [
-                  Image(
-                      height: 80,
-                      opacity: AlwaysStoppedAnimation(0.6),
-                      width: 80,
-                      image: AssetImage("assets/images/leaf.jpg")),
-                  Text(
-                    'Hello\nCanada',
-                    style: TextStyle(
-                        color: Colors.indigo,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w900),
-                  )
-                ],
-              )),
         ],
       ),
     );
